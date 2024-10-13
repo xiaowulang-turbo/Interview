@@ -89,3 +89,45 @@ function LastRemaining_Solution(n, m) {
   }
   return arr[0];
 }
+
+// throttle && debounce
+// 节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效
+// 防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时
+// throttle
+function throttle1(fn, delay = 500) {
+  let oldtime = Date.now();
+  return function (...args) {
+    let newtime = Date.now();
+    if (newtime - oldtime >= delay) {
+      fn.apply(null, args);
+      oldtime = Date.now();
+    }
+  };
+}
+
+function throttle2(fn, delay = 500) {
+  let timer = null;
+  return function (...args) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(null, args);
+        timer = null;
+      }, delay);
+    }
+  };
+}
+
+// debounce
+function debounce1(fn, wait) {
+  let timeout;
+
+  return function (...args) {
+    let context = this;
+    let args = arguments;
+
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(context, args);
+    }, wait);
+  };
+}
