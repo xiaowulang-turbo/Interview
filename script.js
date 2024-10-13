@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 // Question 1 banana
 // “烂香蕉问题”是一个典型的广度优先搜索（BFS）问题，它可以用来模拟感染过程。在这个问题中，我们可以使用二维数组来表示香蕉的状态，其中烂香蕉可以用一个特定的值表示（比如 `0`），而好香蕉可以用另一个值表示（比如 `1`）。每一天，所有烂香蕉会尝试将周围的好香蕉变成烂香蕉。
@@ -13,8 +13,7 @@
 // 4. 当所有好香蕉都变成烂香蕉，或者队列为空且没有新的烂香蕉被添加时，搜索结束。
 
 // 以下是使用JavaScript实现的代码示例：
-
-```javascript
+;```javascript
 function rottenBananas(grid) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -66,7 +65,7 @@ const grid = [
   [1, 0, 1]
 ];
 console.log(rottenBananas(grid)); // 输出至少需要的天数
-```;
+```
 
 // 在这个代码中，我们首先初始化队列，将所有烂香蕉的位置加入队列。然后，我们使用一个`while`循环来模拟每一天的腐烂过程。在每一天结束时，我们增加`day`计数器。最后，我们检查是否所有的香蕉都变烂了，如果没有，则返回-1；如果都变烂了，则返回所需的天数。
 
@@ -77,17 +76,17 @@ console.log(rottenBananas(grid)); // 输出至少需要的天数
 
 function LastRemaining_Solution(n, m) {
   // write code here
-  if (n < 1 || m < 1) return null;
-  let arr = [];
+  if (n < 1 || m < 1) return null
+  let arr = []
   for (let i = 0; i < n; i++) {
-    arr.push(i);
+    arr.push(i)
   }
-  let index = 0;
+  let index = 0
   while (arr.length > 1) {
-    index = (index + m - 1) % arr.length;
-    arr.splice(index, 1);
+    index = (index + m - 1) % arr.length
+    arr.splice(index, 1)
   }
-  return arr[0];
+  return arr[0]
 }
 
 // throttle && debounce
@@ -95,39 +94,39 @@ function LastRemaining_Solution(n, m) {
 // 防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时
 // throttle
 function throttle1(fn, delay = 500) {
-  let oldtime = Date.now();
+  let oldtime = Date.now()
   return function (...args) {
-    let newtime = Date.now();
+    let newtime = Date.now()
     if (newtime - oldtime >= delay) {
-      fn.apply(null, args);
-      oldtime = Date.now();
+      fn.apply(null, args)
+      oldtime = Date.now()
     }
-  };
+  }
 }
 
 function throttle2(fn, delay = 500) {
-  let timer = null;
+  let timer = null
   return function (...args) {
     if (!timer) {
       timer = setTimeout(() => {
-        fn.apply(null, args);
-        timer = null;
-      }, delay);
+        fn.apply(null, args)
+        timer = null
+      }, delay)
     }
-  };
+  }
 }
 
 // debounce
 function debounce1(fn, wait) {
-  let timeout;
+  let timeout
 
   return function (...args) {
-    let context = this;
-    let args = arguments;
+    let context = this
+    let args = arguments
 
-    clearTimeout(timeout);
+    clearTimeout(timeout)
     timeout = setTimeout(() => {
-      fn.apply(context, args);
-    }, wait);
-  };
+      fn.apply(context, args)
+    }, wait)
+  }
 }
