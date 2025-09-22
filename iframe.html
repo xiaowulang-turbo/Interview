@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iframe</title>
+    </head>
+    <body>
+        <div id="iframe-container"></div>
+        <script src="iframe.js"></script>
+        <script>
+            const loader = new SafeIframeLoader({
+                timeout: 8000,
+                container: document.getElementById('iframe-container'),
+            })
+            loader
+                .loadIframe('https://example.com')
+                .then((iframe) => {
+                    console.log('iframe加载成功:', iframe)
+                    return loader.postMessage({ type: 'getData', id: 123 })
+                })
+                .then((response) => {
+                    console.log('收到响应:', response)
+                })
+                .catch((error) => {
+                    console.error('操作失败:', error)
+                })
+                .finally(() => {
+                    return loader.destroy()
+                })
+        </script>
+    </body>
+</html>
